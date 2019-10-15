@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row" >
+    <div class="col-md-10">
+      <div class="col-md-12 text-center" style="margin-right: 100px">
+        <p style="font-size: 30px">CUSTOMER LIST</p>
+      </div>
+      <div class="container-fluid">
+        <div class="table table-responsive-lg ">
+          <div class="table-head table-bordered">
+            <div class="row">
+              <div class="col">Id</div>
+              <div class="col">First Name</div>
+              <div class="col">Last Name</div>
+
+            </div>
+          </div>
+          <div class="table-body table-bordered ">
+            <div *ngFor="let customer of customers | filter: item | paginate:{itemsPerPage: size,currentPage: page,totalItems: totalElements}"
+                 class="row">
+
+              <div class="col">{{customer.id}}</div>
+              <div class="col">{{customer.firstName}}</div>
+              <div class="col">{{customer.lastName}}</div>
+            </div>
+          </div>
+          <pagination-controls
+            (pageChange)="page = $event; pageChangeFire(page)"
+            nextLabel="Next"
+            previousLabel="Previous"
+            responsive="true"
+            screenReaderCurrentLabel="You're on page">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="col-md-12 text-center" style="margin-right: 100px; margin-top: 10px">
+        <input type="text" [(ngModel)]="item" style="height: 35px;" placeholder="Search ">
+      </div>
+      <div class="col-md-12 text-center" style="margin-right: 100px; margin-top: 10px">
+        <input type="button" (click)="generateReport()" style="height: 35px;" value="Generate Report">
+      </div>
+    </div>
+  </div>
+</div>
